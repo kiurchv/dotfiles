@@ -1,0 +1,9 @@
+[core]
+	excludesfile = /Users/mkyurchev/.gitignore
+[user]
+	name = Miroslav Kyurchev
+	email = mkyurchev@gmail.com
+[credential]
+	helper = osxkeychain
+[push]
+	default = simple

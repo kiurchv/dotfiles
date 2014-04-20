@@ -1,0 +1,7 @@
+fresh freshshell/fresh bin/fresh --bin
+
+fresh-options --file
+  fresh gitconfig
+  fresh gitignore
+  fresh zshrc
+fresh-options
