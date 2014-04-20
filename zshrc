@@ -82,4 +82,3 @@ eval "$(rbenv init -)"
 
 # fresh
 source ~/.fresh/build/shell.sh
-source ~/.fresh/build/vendor/zsh-syntax-highlighting.zsh
