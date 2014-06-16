@@ -83,5 +83,8 @@ eval "$(rbenv init -)"
 # nvm
 source ~/.nvm/nvm.sh
 
+# PHP extensions
+export PATH="$(brew --prefix php55)/bin:$PATH"
+
 # fresh
 source ~/.fresh/build/shell.sh
