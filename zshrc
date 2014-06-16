@@ -48,7 +48,7 @@ COMPLETION_WAITING_DOTS="true"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(atom bower brew bundler colorize cp extract git github heroku npm nvm osx postgres rails rake rbenv web-search zsh_reload)
+plugins=(atom brew bundler colorize cp extract git github heroku npm nvm osx postgres rails rake rbenv web-search zsh_reload)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -79,6 +79,9 @@ export PATH="/usr/local/bin:$PATH"
 # rbenv
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
+
+# nvm
+source ~/.nvm/nvm.sh
 
 # fresh
 source ~/.fresh/build/shell.sh
