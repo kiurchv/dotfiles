@@ -5,3 +5,5 @@ fresh-options --file
   fresh gitignore
   fresh zshrc
 fresh-options
+
+fresh oh-my-zsh/git-custom --file=~/.oh-my-zsh/custom/plugins/git-custom/
