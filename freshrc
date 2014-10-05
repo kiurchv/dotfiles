@@ -6,4 +6,6 @@ fresh-options --file
   fresh zshrc
 fresh-options
 
-fresh oh-my-zsh/git-custom --file=~/.oh-my-zsh/custom/plugins/git-custom/
+for PLUGIN in git-custom gi; do
+  fresh oh-my-zsh/$PLUGIN --file=~/.oh-my-zsh/custom/plugins/$PLUGIN/
+done
