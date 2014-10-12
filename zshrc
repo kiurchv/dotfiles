@@ -58,7 +58,7 @@ export PATH="/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin"
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
-# export LANG=en_US.UTF-8
+export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
 # if [[ -n $SSH_CONNECTION ]]; then
@@ -66,6 +66,7 @@ export PATH="/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin"
 # else
 #   export EDITOR='mvim'
 # fi
+export EDITOR='vim'
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"

@@ -3,6 +3,8 @@ fresh freshshell/fresh bin/fresh --bin
 fresh-options --file
   fresh gitconfig
   fresh gitignore
+  fresh vimrc.local
+  fresh vimrc.before.local
   fresh zshrc
 fresh-options
 
