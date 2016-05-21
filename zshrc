@@ -48,28 +48,23 @@ COMPLETION_WAITING_DOTS="true"
 # Dont use Bundler for these commands
 UNBUNDLED_COMMANDS=(knife pry)
 
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
+# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(atom brew bundler colorize cp extract git git-custom github gi heroku npm nvm osx postgres rails rake rbenv web-search zsh_reload)
+plugins=(atom brew brew-cask bundler colorize command-not-found cp emoji extract git git-custom github gi gulp heroku history jsontools mix-fast npm nvm osx pip pj postgres python rails rake-fast rbenv rebar ruby thefuck vagrant web-search zsh_reload)
 
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
-export PATH="/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin"
+export PATH="$HOME/bin:$PATH"
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
 export LANG=en_US.UTF-8
 
-# Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
-export EDITOR='vim'
+# Preferred editor
+export EDITOR="vim"
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
@@ -77,18 +72,8 @@ export EDITOR='vim'
 # ssh
 # export SSH_KEY_PATH="~/.ssh/dsa_id"
 
-# Homebrew
-export PATH="/usr/local/bin:$PATH"
-
-# rbenv
-export PATH="$HOME/.rbenv/bin:$PATH"
-eval "$(rbenv init -)"
-
-# nvm
-source ~/.nvm/nvm.sh
+PROJECT_PATHS=(~/Projects)
 
 # PHP extensions
 export PATH="$(brew --prefix php55)/bin:$PATH"
 
-# fresh
-source ~/.fresh/build/shell.sh

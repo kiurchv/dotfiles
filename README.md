@@ -12,11 +12,24 @@ I use zsh as default shell and my shell config based on [oh-my-zsh](https://gith
 curl -L http://install.ohmyz.sh | sh
 ```
 
+Dotfiles are managed by [rcm](https://github.com/thoughtbot/rcm):
+
+```
+brew tap thoughtbot/formulae
+brew install rcm
+```
+
 Installation
 ------------
 
-Dotfiles are managed by [fresh](https://github.com/freshshell/fresh).
+Clone this repository:
 
 ```
-FRESH_LOCAL_SOURCE=mkyurchev/dotfiles bash -c "`curl -sL get.freshshell.com`"
+git clone git@github.com:mkyurchev/dotfiles.git .dotfiles
+```
+
+Install dotfiles:
+
+```
+env RCRC=$HOME/.dotfiles/rcrc rcup
 ```
