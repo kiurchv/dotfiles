@@ -77,3 +77,5 @@ PROJECT_PATHS=(~/Projects)
 # PHP extensions
 export PATH="$(brew --prefix php55)/bin:$PATH"
 
+# iTerm integration
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
