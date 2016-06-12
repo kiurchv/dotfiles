@@ -1,8 +1,9 @@
 [core]
-	excludesfile = /Users/mkyurchev/.gitignore
+	excludesfile = /Users/kiurchv/.gitignore
 [user]
-	name = Miroslav Kyurchev
-	email = mkyurchev@gmail.com
+	name = Myroslav Kiurchev
+	email = kiurchv@gmail.com
+	signingkey = 17FB941A
 [credential]
 	helper = osxkeychain
 [push]
