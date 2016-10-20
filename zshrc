@@ -77,5 +77,11 @@ PROJECT_PATHS=(~/Projects)
 # PHP extensions
 export PATH="$(brew --prefix php55)/bin:$PATH"
 
+# Go variables
+export GOPATH=$HOME
+
 # iTerm integration
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
+# Yarn binaries
+export PATH="$PATH:$HOME/.yarn/bin"
