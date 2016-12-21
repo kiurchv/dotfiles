@@ -1,0 +1,120 @@
+#!/bin/sh
+
+# Setup logging
+LOG_DIR=$(mktemp -d /tmp/rcm.`basename $0`.XXXXXX)
+trap '[ $? -gt 0 ] || rm -rf $LOG_DIR' INT TERM EXIT
+
+# Console messages
+SAVE_POS='\033[s'
+REST_POS='\033[u'
+CLR_EOL='\033[K'
+SUDO_PROMPT='Enter your sudo password: '
+waiting_msg() {
+  if [ $# -gt 1 ]; then
+    printf "Installing $1 to '$2'... $SAVE_POS"
+  else
+    printf "Installing $1... $SAVE_POS"
+  fi
+}
+done_msg() {
+  printf "${REST_POS}${CLR_EOL}done.\n"
+}
+fail() {
+  MSG="${REST_POS}${CLR_EOL}failed."
+  if [ $# -lt 1 ]; then
+    printf "$MSG\n"
+  else
+    printf "$MSG See $1 for details.\n"
+  fi
+  exit 1
+}
+ask_pass() {
+  read -s -p "Password:" USER_PASS
+  echo $USER_PASS
+}
+
+# Install asdf
+ASDF_DEST="$HOME/.asdf"
+if [ ! -e "$ASDF_DEST" ]; then
+  ASDF_LOG="$LOG_DIR/0.asdf.log"
+
+  waiting_msg asdf "$ASDF_DEST"
+  git clone --no-checkout https://github.com/asdf-vm/asdf.git "$ASDF_DEST" 2>$ASDF_LOG && \
+  cd "$ASDF_DEST" && \
+  git checkout $(git describe --tags `git rev-list --tags --max-count=1`) 2>>$ASDF_LOG && \
+  cd && \
+  done_msg || fail $ASDF_LOG
+fi
+
+# Install vim-plug
+VIM_PLUG_DEST="$HOME/.vim/autoload/plug.vim"
+if [ ! -e "$VIM_PLUG_DEST" ]; then
+  VIM_PLUG_LOG="$LOG_DIR/1.vim-plug.log"
+
+  waiting_msg vim-plug "$VIM_PLUG_DEST"
+  curl --location https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim \
+       --output "$VIM_PLUG_DEST" --create-dirs \
+       --stderr $VIM_PLUG_LOG --silent --show-error && \
+  done_msg || fail $VIM_PLUG_LOG
+fi
+
+# Install vim plugins
+VIM_PLUGINS_LOG="$LOG_DIR/2.vim-plugins.log"
+waiting_msg 'vim plugins'
+vim -u "$HOME/.vimrc.plugins" +PlugInstall +PlugClean! +qa -V$VIM_PLUGINS_LOG >/dev/null 2>&1 && \
+done_msg || fail $VIM_PLUGINS_LOG
+
+# Install zplug
+ZPLUG_DEST="$HOME/.zplug"
+if [ ! -e "$ZPLUG_DEST" ]; then
+  ZPLUG_LOG="$LOG_DIR/3.zplug.log"
+
+  waiting_msg zplug $ZPLUG_DEST
+  git clone https://github.com/zplug/zplug.git "$ZPLUG_DEST" 2>$ZPLUG_LOG && \
+  done_msg || fail $ZPLUG_LOG
+fi
+
+# Install zsh plugins
+ZSH_PLUGINS_LOG="$LOG_DIR/4.zsh_plugins.log"
+waiting_msg 'zsh plugins'
+zsh -ic 'zplug check || (zplug clear && zplug install)' >/dev/null 2>$ZSH_PLUGINS_LOG && \
+done_msg || fail $ZSH_PLUGINS_LOG
+
+# Change shell to zsh
+if hash zsh >/dev/null 2>&1; then
+  if [ -e /proc/version ] && grep Microsoft /proc/version >/dev/null; then
+    # Windows Subsystem for Linux
+
+    BASHRC="$HOME/.bashrc"
+    ZSH_REGEX='^\[ -t 1 \] && exec .*zsh$'
+    # Due to limitations WSL we need to launch zsh from bash session
+    if ! grep "$ZSH_REGEX" "$BASHRC" >/dev/null; then
+      printf "Adding zsh launcher to .bashrc... $SAVE_POS"
+      echo "[ -t 1 ] && exec $(which zsh)" >> ~/.bashrc && \
+      done_msg || fail
+    fi
+  else
+    # macOS or Linux
+
+    ZSH=`which zsh`
+    SHELLS=/etc/shells
+    # Add zsh to /etc/shells if absent
+    if ! grep "^$ZSH$" $SHELLS >/dev/null; then
+      printf "Adding $ZSH to $SHELLS... $SAVE_POS\n"
+      /usr/bin/sudo -p "$SUDO_PROMPT" sh -c "echo $ZSH >> $SHELLS" && \
+      done_msg || fail
+    fi
+    # Detect user's shell
+    USER_SHELL=$( \
+      [ `uname -s` = 'Darwin' ] \
+      && dscl localhost -read /Local/Default/Users/$USER UserShell | awk '{print $2;}' \
+      || getent passwd $USER | cut -d: -f7 \
+    )
+    # Change user's shell if it isn't zsh
+    if [ ! "$USER_SHELL" = "$ZSH" ]; then
+      printf "Changing $USER's shell to $ZSH... $SAVE_POS\n"
+      /usr/bin/sudo -p "$SUDO_PROMPT" chsh -s "$ZSH" $USER >/dev/null 2>&1 && \
+      done_msg || fail
+    fi
+  fi
+fi

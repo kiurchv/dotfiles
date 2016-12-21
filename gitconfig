@@ -1,4 +1,5 @@
 [core]
+	editor = $EDITOR
 	excludesfile = /Users/kiurchv/.gitignore
 [user]
 	name = Myroslav Kiurchev

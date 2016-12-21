@@ -1,0 +1,7 @@
+*.local
+*.local.zsh
+zsh/.zcompcache
+zsh/.zcompdump
+zsh/bookmarks
+zsh/completions
+zsh/plugins

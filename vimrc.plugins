@@ -1,0 +1,39 @@
+if &compatible
+  set nocompatible
+end
+
+call plug#begin()
+
+" Language
+Plug 'vim-syntastic/syntastic'
+Plug 'tomtom/tcomment_vim'
+Plug 'pangloss/vim-javascript'
+Plug 'vim-ruby/vim-ruby'
+Plug 'elixir-lang/vim-elixir'
+Plug 'leshill/vim-json'
+Plug 'tpope/vim-markdown'
+
+" Completion
+Plug 'valloric/youcompleteme', { 'do': './install.py' }
+Plug 'raimondi/delimitmate'
+
+" Code display
+Plug 'nathanaelkane/vim-indent-guides'
+Plug 'bronson/vim-trailing-whitespace'
+
+" Integrations
+Plug 'mileszs/ack.vim'
+Plug 'dkendal/fzy-vim'
+
+" Interface
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'airblade/vim-gitgutter'
+
+" Local plugins list
+if filereadable(expand("~/.vimrc.plugins.local"))
+  source ~/.vimrc.plugins.local
+endif
+
+call plug#end()
