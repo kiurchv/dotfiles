@@ -2,6 +2,10 @@
 	excludesfile = /Users/kiurchv/.gitignore
 [credential]
 	helper = osxkeychain
+[commit]
+	gpgsign = true
+[gpg]
+	program = /usr/local/bin/gpg
 [push]
 	default = simple
 [user]
