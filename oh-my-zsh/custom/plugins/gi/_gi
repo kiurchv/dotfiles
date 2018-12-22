@@ -1,6 +1,0 @@
-#compdef gi
-#autoload
-
-if [[ "$words[2]" != "list" ]]; then
-  compadd `gi list`
-fi
