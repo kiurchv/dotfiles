@@ -6,8 +6,12 @@
 	gpgsign = true
 [gpg]
 	program = /usr/local/bin/gpg
+[pull]
+	rebase = true
 [push]
-	default = simple
+	default = current
+[rebase]
+	autoStash = true
 [user]
 	name = Myroslav Kiurchev
 	email = kiurchv@gmail.com
