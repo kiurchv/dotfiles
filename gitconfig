@@ -1,10 +1,10 @@
 [core]
 	excludesfile = /Users/kiurchv/.gitignore
-[user]
-	name = Myroslav Kiurchev
-	email = kiurchv@gmail.com
-	signingkey = CE5310A0D4754F74
 [credential]
 	helper = osxkeychain
 [push]
 	default = simple
+[user]
+	name = Myroslav Kiurchev
+	email = kiurchv@gmail.com
+	signingkey = CE5310A0D4754F74
