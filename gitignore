@@ -3,3 +3,4 @@
 .mix_tasks
 .rake_tasks
 
+.elixir_ls
