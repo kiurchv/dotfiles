@@ -1,0 +1,72 @@
+{
+	"auto_show_diagnostics_panel": false,
+	"clients":
+	{
+		"elixir":
+		{
+			"command":
+			[
+				"elixir-language-server"
+			],
+			"enabled": true,
+			"languageId": "elixir",
+			"scopes":
+			[
+				"source.elixir"
+			],
+			"syntaxes":
+			[
+				"Packages/Elixir/Syntaxes/Elixir.tmLanguage"
+			]
+		},
+		"flow":
+		{
+			"command":
+			[
+				"flow-language-server",
+				"--stdio",
+				"--try-flow-bin",
+				"--no-auto-download"
+			],
+			"enabled": true,
+			"initializationOptions":
+			{
+				"nodePath": "/usr/local/bin/node"
+			},
+			"languageId": "javascript",
+			"scopes":
+			[
+				"source.js"
+			],
+			"syntaxes":
+			[
+				"Packages/Babel/JavaScript (Babel).sublime-syntax",
+				"Packages/JavaScript/JavaScript.sublime-syntax"
+			]
+		},
+		"graphql":
+		{
+			"command":
+			[
+				"graphql",
+				"server",
+				"-m=stream"
+			],
+			"enabled": true,
+			"languageId": "graphql",
+			"scopes":
+			[
+				"source.graphql"
+			],
+			"syntaxes":
+			[
+				"Packages/GraphQL/GraphQL.sublime-syntax"
+			]
+		}
+	},
+	"log_debug": true,
+	"log_payloads": true,
+	"log_stderr": true,
+	"show_diagnostics_count_in_view_status": true,
+	"show_diagnostics_severity_level": 4
+}

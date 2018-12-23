@@ -1,0 +1,32 @@
+{
+	"bootstrapped": true,
+	"in_process_packages":
+	[
+	],
+	"installed_packages":
+	[
+		"Babel",
+		"Case Conversion",
+		"Cucumber",
+		"Dockerfile Syntax Highlighting",
+		"DotENV",
+		"Elixir",
+		"File History",
+		"FileIcons Mono",
+		"Generic Config",
+		"GitGutter",
+		"GraphQL",
+		"JsPrettier",
+		"LSP",
+		"MarkdownPreview",
+		"Monokai Extended",
+		"Package Control",
+		"ProjectManager",
+		"Protocol Buffer Syntax",
+		"Theme - Monokai Pro",
+		"WakaTime"
+	],
+	"repositories":
+	[
+	]
+}

@@ -1,0 +1,8 @@
+#!/bin/bash
+
+SUBLIME_TEXT_CONFIG_PATH="$HOME/.config/sublime-text-3"
+MACOS_SUBLIME_TEXT_CONFIG_PATH="$HOME/Library/Application Support/Sublime Text 3"
+
+if [[ "$OSTYPE" == "darwin"* && ! -d "$MACOS_SUBLIME_TEXT_CONFIG_PATH" ]]; then
+  ln -s "$SUBLIME_TEXT_CONFIG_PATH" "$MACOS_SUBLIME_TEXT_CONFIG_PATH"
+fi
