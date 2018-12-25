@@ -1,29 +1,12 @@
-Dotfiles
-========
+# Dotfiles
 
 Configs for various things.
 
-Dependencies
-------------
+## Dependencies
 
-Dotfiles are managed by [rcm](https://github.com/thoughtbot/rcm):
+- [Homebrew](http://brew.sh) or [Linuxbrew](http://linuxbrew.sh)
+- [rcm](https://github.com/thoughtbot/rcm)
 
-```
-brew tap thoughtbot/formulae
-brew install rcm
-```
+## Installation
 
-Installation
-------------
-
-Clone this repository:
-
-```
-git clone git@github.com:mkyurchev/dotfiles.git .dotfiles
-```
-
-Install dotfiles:
-
-```
-env RCRC=$HOME/.dotfiles/rcrc rcup
-```
+Dotfiles are managed by [rcm](https://github.com/thoughtbot/rcm)
