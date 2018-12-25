@@ -1,0 +1,27 @@
+#!/bin/sh
+
+FISHER_PATH="$HOME/.config/fish/functions/fisher.fish"
+FISH=`which fish`
+USER_SHELL=$(\
+  [ `uname -s` = 'Darwin' ]\
+  && dscl localhost -read /Local/Default/Users/$USER UserShell | awk '{print $2;}'\
+  || getent passwd $USER | cut -d: -f7\
+)
+
+# Install fisher package manager
+if [ ! -f "$FISHER_PATH" ]; then
+  curl https://git.io/fisher --create-dirs -sLo $FISHER_PATH
+fi
+
+# Install fish packages
+fish -c fisher
+
+# Add fish to /etc/shells if not present
+if ! grep -q "$FISH\$" /etc/shells; then
+  echo `which fish` | sudo tee -a /etc/shells
+fi
+
+# Change user's login shell
+if [ ! "$USER_SHELL" = "$FISH" ]; then
+  chsh -s "$FISH"
+fi
