@@ -1,0 +1,17 @@
+#!/bin/sh
+
+# Install required plugins
+for plugin in `cat $HOME/.tool-versions | awk '{print $1}'`; do
+  if ! $(asdf plugin-list | grep -q "^$plugin\$") ; then
+    asdf plugin-add $plugin
+  fi
+done
+
+# Set options to pass to configure when building OTP
+export KERL_CONFIGURE_OPTIONS="--disable-debug --without-javac"
+
+# Import the Node.js release team's OpenPGP keys to main keyring
+bash $HOME/.asdf/plugins/nodejs/bin/import-release-team-keyring
+
+# Install tools
+asdf install
