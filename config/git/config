@@ -1,9 +1,9 @@
 [core]
-	excludesfile = /Users/kiurchv/.gitignore
+	excludesfile = ~/.config/git/ignore
 [credential]
 	helper = osxkeychain
 [commit]
-	gpgsign = true
+#	gpgsign = true
 [gpg]
 	program = /usr/local/bin/gpg
 [merge "npm-merge-driver"]
