@@ -1,9 +1,0 @@
-{
-	"extensions":
-	[
-		".browserslistrc",
-		".dockerignore",
-		".flowconfig",
-		".prettierignore",
-	]
-}
