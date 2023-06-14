@@ -5,7 +5,7 @@
 	],
 	"installed_packages":
 	[
-		"Babel",
+		"API Blueprint",
 		"Case Conversion",
 		"Cucumber",
 		"Dockerfile Syntax Highlighting",
@@ -13,20 +13,27 @@
 		"Elixir",
 		"File History",
 		"FileIcons Mono",
+		"fish",
 		"Generic Config",
-		"GitGutter",
 		"GraphQL",
 		"JsPrettier",
+		"Kotlin",
 		"LSP",
 		"MarkdownPreview",
+		"MDX Syntax Highlighting",
 		"Monokai Extended",
+		"Mustache",
 		"Package Control",
 		"ProjectManager",
 		"Protocol Buffer Syntax",
+		"SCSS",
+		"Tabnine",
 		"Theme - Monokai Pro",
+		"TypeScript-TmLanguage",
 		"WakaTime"
 	],
 	"repositories":
 	[
+		"https://github.com/Microsoft/TypeScript-TmLanguage"
 	]
 }
