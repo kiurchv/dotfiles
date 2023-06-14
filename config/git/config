@@ -15,7 +15,10 @@
 	default = current
 [rebase]
 	autoStash = true
+	autoSquash = true
 [user]
 	name = Myroslav Kiurchev
 	email = kiurchv@gmail.com
 	signingkey = CE5310A0D4754F74
+[init]
+	defaultBranch = main
