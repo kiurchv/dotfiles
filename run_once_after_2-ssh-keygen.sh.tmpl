@@ -1,11 +1,15 @@
 #!/bin/sh
 
+printf '\n\360\237\224\275 \062\357\270\217\342\203\243\040 Setup SSH keys'
+
 KEY_ALGORITHM=ed25519
 
 # Check for SSH keys presence and validity
 if [ ! -f "$HOME/.ssh/id_$KEY_ALGORITHM" ] || \
    [ ! -f "$HOME/.ssh/id_$KEY_ALGORITHM.pub" ] || \
    [ ! `ssh-keygen -l -f $HOME/.ssh/id_$KEY_ALGORITHM.pub | awk '{print $3;}'` = {{ .email | quote }} ]; then
+
+  printf '\n\n'
 
   # Generate SSH keys
   ssh-keygen -t $KEY_ALGORITHM -f $HOME/.ssh/id_$KEY_ALGORITHM -C {{ .email | quote }}
@@ -22,4 +26,6 @@ if [ ! -f "$HOME/.ssh/id_$KEY_ALGORITHM" ] || \
 
   # Add the SSH public key to GitHub account
   gh ssh-key add ~/.ssh/id_$KEY_ALGORITHM.pub --title "$COMPUTER_NAME ($SERIAL_NUMBER)"
+else
+  printf ' \342\234\205\n'
 fi
