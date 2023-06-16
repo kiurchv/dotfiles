@@ -1,0 +1,25 @@
+#!/bin/sh
+
+KEY_ALGORITHM=ed25519
+
+# Check for SSH keys presence and validity
+if [ ! -f "$HOME/.ssh/id_$KEY_ALGORITHM" ] || \
+   [ ! -f "$HOME/.ssh/id_$KEY_ALGORITHM.pub" ] || \
+   [ ! `ssh-keygen -l -f $HOME/.ssh/id_$KEY_ALGORITHM.pub | awk '{print $3;}'` = {{ .email | quote }} ]; then
+
+  # Generate SSH keys
+  ssh-keygen -t $KEY_ALGORITHM -f $HOME/.ssh/id_$KEY_ALGORITHM -C {{ .email | quote }}
+
+  # Start the ssh-agent in the background
+  eval "$(ssh-agent -s)"
+
+  # Add SSH private key to the ssh-agent and store passphrase in the keychain
+  ssh-add --apple-use-keychain ~/.ssh/id_$KEY_ALGORITHM
+
+  # Collect machine metadata for proper key title
+  COMPUTER_NAME="$(scutil --get ComputerName)"
+  SERIAL_NUMBER="$(ioreg -c IOPlatformExpertDevice -d 2 | awk -F\" '/IOPlatformSerialNumber/{print $(NF-1)}')"
+
+  # Add the SSH public key to GitHub account
+  gh ssh-key add ~/.ssh/id_$KEY_ALGORITHM.pub --title "$COMPUTER_NAME ($SERIAL_NUMBER)"
+fi
