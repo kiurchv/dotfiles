@@ -1,11 +1,13 @@
-# setup editor
+# Setup editor
 set -gx EDITOR vim
 
+# Setup Homebrew env
+eval "$({{ template "homebrew-prefix" . }}/bin/brew shellenv)"
 
-# initialize asdf
-source /usr/local/opt/asdf/asdf.fish
+# Setup rtx env
+rtx activate fish | source
 
-# Android SDK
+# Setup Android SDK env
 set -x ANDROID_HOME $HOME/Library/Android/sdk
 set -x PATH $PATH $ANDROID_HOME/emulator
 set -x PATH $PATH $ANDROID_HOME/tools

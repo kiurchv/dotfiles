@@ -1,0 +1,15 @@
+brew "chezmoi"
+brew "coreutils" unless `uname -s` =~ /Linux/
+brew "fish"
+brew "gh"
+brew "git"
+brew "gpg"
+brew "htop"
+brew "jq"
+brew "neovim"
+brew "nmap"
+brew "rtx"
+
+cask "1password"
+cask "google-chrome"
+cask "slack"

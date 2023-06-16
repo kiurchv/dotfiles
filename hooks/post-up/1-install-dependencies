@@ -1,5 +1,0 @@
-#!/bin/sh
-
-if ! brew bundle check --global >/dev/null; then
-  brew bundle --global --verbose
-fi

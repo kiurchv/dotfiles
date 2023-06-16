@@ -2,11 +2,10 @@
 
 Configs for various things.
 
-## Dependencies
-
-- [Homebrew](http://brew.sh) or [Linuxbrew](http://linuxbrew.sh)
-- [rcm](https://github.com/thoughtbot/rcm)
-
 ## Installation
 
-Dotfiles are managed by [rcm](https://github.com/thoughtbot/rcm)
+Dotfiles are managed by `[chezmoi](https://www.chezmoi.io)`.
+
+```sh
+sh -c "$(curl -fsLS get.chezmoi.io)" -- -b $TMPDIR init --apply kiurchv
+```

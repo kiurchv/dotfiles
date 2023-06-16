@@ -1,0 +1,18 @@
+[core]
+	excludesfile = ~/.config/git/ignore
+[credential]
+	helper = osxkeychain
+[gpg]
+	program = /usr/local/bin/gpg
+[init]
+	defaultBranch = main
+[pull]
+	rebase = true
+[push]
+	default = current
+[rebase]
+	autoStash = true
+	autoSquash = true
+[user]
+	name = {{ .name | quote }}
+	email = {{ .email | quote }}
