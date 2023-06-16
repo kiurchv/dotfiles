@@ -1,0 +1,10 @@
+#!/bin/sh
+
+# Ensure Homebrew env is set
+eval "$({{ template "homebrew-prefix" . }}/bin/brew shellenv)"
+
+printf '\nLogin to GitHub CLI\n\n'
+
+if ! gh auth status >/dev/null 2>&1; then
+  gh auth login --scopes admin:public_key --web
+fi

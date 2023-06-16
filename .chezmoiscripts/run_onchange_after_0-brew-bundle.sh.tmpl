@@ -1,15 +1,11 @@
 #!/bin/sh
 
-printf '\n\360\237\224\204 Install Homebrew bundle'
-
 # Ensure Homebrew env is set
 eval "$({{ template "homebrew-prefix" . }}/bin/brew shellenv)"
 
+printf '\nInstall Homebrew bundle\n\n'
+
 # dot_Brewfile hash: {{ include "dot_Brewfile" | sha256sum }}
 if ! brew bundle check --global >/dev/null 2>&1; then
-  printf '\n\n'
-
   brew bundle --global --no-upgrade --verbose
-else
-  printf ' \342\234\205\n'
 fi
