@@ -1,11 +1,21 @@
 [core]
 	excludesfile = ~/.config/git/ignore
+	pager = delta
 [credential]
 	helper = osxkeychain
+[delta]
+	navigate = true
+	light = false
+[diff]
+	colorMoved = default
 [gpg]
 	program = /usr/local/bin/gpg
 [init]
 	defaultBranch = main
+[interactive]
+	diffFilter = delta --color-only
+[merge]
+	conflictstyle = diff3
 [pull]
 	rebase = true
 [push]
