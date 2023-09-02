@@ -1,0 +1,7 @@
+#!/bin/sh
+
+printf '\nAdd rtx shims to global PATH config\n\n'
+
+if [ ! -f "/etc/paths.d/rtx" ]; then
+  echo "$HOME/.local/share/rtx/shims" | sudo tee /etc/paths.d/rtx
+fi

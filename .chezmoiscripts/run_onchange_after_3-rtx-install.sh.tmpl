@@ -1,9 +1,0 @@
-#!/bin/sh
-
-# Ensure Homebrew env is set
-eval "$({{ template "homebrew-prefix" . }}/bin/brew shellenv)"
-
-printf '\nInstall runtimes via rtx\n\n'
-
-# dot_tool-versions hash: {{ include "dot_tool-versions" | sha256sum }}
-rtx install
