@@ -1,6 +1,6 @@
 Include ~/.orbstack/ssh/config
 
-Host github.com
-  AddKeysToAgent yes
-  UseKeychain yes
-  IdentityFile ~/.ssh/id_ed25519
+Host *
+  IdentityAgent "~/.1password/agent.sock"
+  IdentityFile ~/.ssh/id_ed25519.pub
+  IdentitiesOnly yes

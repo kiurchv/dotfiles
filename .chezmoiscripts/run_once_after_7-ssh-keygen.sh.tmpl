@@ -1,30 +1,38 @@
-#!/bin/sh
+#!/bin/bash
 
 # Ensure Homebrew env is set
 eval "$({{ template "homebrew-prefix" . }}/bin/brew shellenv)"
 
 printf '\nSetup SSH keys\n\n'
 
-KEY_ALGORITHM=ed25519
+PUBLIC_KEY_FILE="$HOME/.ssh/id_ed25519.pub"
 
 # Check for SSH keys presence and validity
-if [ ! -f "$HOME/.ssh/id_$KEY_ALGORITHM" ] || \
-   [ ! -f "$HOME/.ssh/id_$KEY_ALGORITHM.pub" ] || \
-   [ ! `ssh-keygen -l -f $HOME/.ssh/id_$KEY_ALGORITHM.pub | awk '{print $3;}'` = {{ .email | quote }} ]; then
-
-  # Generate SSH keys
-  ssh-keygen -t $KEY_ALGORITHM -f $HOME/.ssh/id_$KEY_ALGORITHM -C {{ .email | quote }}
-
-  # Start the ssh-agent in the background
-  eval "$(ssh-agent -s)"
-
-  # Add SSH private key to the ssh-agent and store passphrase in the keychain
-  ssh-add --apple-use-keychain ~/.ssh/id_$KEY_ALGORITHM
-
+if [ ! -f "$PUBLIC_KEY_FILE" ]; then
   # Collect machine metadata for proper key title
   COMPUTER_NAME="$(scutil --get ComputerName)"
   SERIAL_NUMBER="$(ioreg -c IOPlatformExpertDevice -d 2 | awk -F\" '/IOPlatformSerialNumber/{print $(NF-1)}')"
+  KEY_TITLE="$COMPUTER_NAME ($SERIAL_NUMBER)"
 
-  # Add the SSH public key to GitHub account
-  gh ssh-key add ~/.ssh/id_$KEY_ALGORITHM.pub --title "$COMPUTER_NAME ($SERIAL_NUMBER)"
+  # Check for existing key pair in 1Password
+  KEY_OUTPUT="$(op item get "$KEY_TITLE" --format=json)" KEY_FOUND=$?
+
+  if [ $KEY_FOUND -eq 0 ]; then
+    echo "Found existing SSH key pair \"$KEY_TITLE\""
+  else
+    echo "Generating new SSH key pair \"$KEY_TITLE\""
+    KEY_OUTPUT="$(op ssh generate --title "$KEY_TITLE" --format json)"
+  fi
+
+  # Get public key contents from 1Password output
+  PUBLIC_KEY="$(printf '%s\n' "$KEY_OUTPUT" | jq -r '.fields[] | select(.id == "public_key") | .value')"
+
+  echo "Writing SSH public key to $PUBLIC_KEY_FILE"
+  echo "$PUBLIC_KEY" > "$PUBLIC_KEY_FILE"
+  chmod 644 "$PUBLIC_KEY_FILE"
+
+  if [ $KEY_FOUND -ne 0 ]; then
+    echo "Adding new SSH public key to GitHub account"
+    gh ssh-key add "$PUBLIC_KEY_FILE" --title "$KEY_TITLE"
+  fi
 fi

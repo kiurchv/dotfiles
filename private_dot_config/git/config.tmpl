@@ -1,15 +1,17 @@
+[commit]
+	gpgsign = true
 [core]
 	excludesfile = ~/.config/git/ignore
 	pager = delta
-[credential]
-	helper = osxkeychain
 [delta]
 	navigate = true
 	light = false
 [diff]
 	colorMoved = default
 [gpg]
-	program = /usr/local/bin/gpg
+	format = ssh
+[gpg "ssh"]
+	program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign"
 [init]
 	defaultBranch = main
 [interactive]
@@ -26,3 +28,4 @@
 [user]
 	name = {{ .name | quote }}
 	email = {{ .email | quote }}
+	signingkey = "~/.ssh/id_ed25519.pub"
