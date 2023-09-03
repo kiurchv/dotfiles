@@ -1,0 +1,5 @@
+# Setup Homebrew env
+eval "$({{ template "homebrew-prefix" . }}/bin/brew shellenv)"
+
+# Setup rtx env
+eval "$(rtx activate zsh)"
