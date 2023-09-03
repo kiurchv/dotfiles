@@ -1,0 +1,116 @@
+# # Get editor completions based on the config schema
+# "$schema" = 'https://starship.rs/config-schema.json'
+
+add_newline = true
+
+command_timeout = 1000
+
+format = """
+$username\
+$directory\
+$hostname\
+$git_branch\
+$git_state\
+$git_status\
+$cmd_duration\
+$jobs\
+$line_break\
+$character
+"""
+
+right_format = """
+$nodejs\
+$ruby\
+$elixir\
+$erlang\
+$golang\
+$rust\
+$kubernetes
+"""
+
+[username]
+format = '[$user]($style) '
+
+[directory]
+style = "blue"
+read_only = ""
+
+[hostname]
+ssh_symbol = ""
+format = '[$ssh_symbol$hostname]($style) '
+style = "dimmed green"
+
+[git_branch]
+format = '[$branch]($style)'
+style = "bright-black"
+
+[git_state]
+format = '\([$state( $progress_current/$progress_total)]($style)\) '
+style = "bright-black"
+
+[git_status]
+format = '[[(*$conflicted$untracked$modified$staged$renamed$deleted)](218) ($ahead_behind$stashed)]($style)'
+style = "cyan"
+conflicted = "​"
+untracked = "​"
+modified = "​"
+staged = "​"
+renamed = "​"
+deleted = "​"
+stashed = "≡"
+
+[cmd_duration]
+format = '[$duration]($style) '
+style = "yellow"
+
+[jobs]
+style = "cyan"
+
+[character]
+# success_symbol = "[❯](purple)"
+# error_symbol = "[❯](red)"
+# vimcmd_symbol = "[❮](green)"
+success_symbol = ""
+error_symbol = ""
+vimcmd_symbol = ""
+
+[nodejs]
+format = '[$symbol$version]($style) '
+version_format = "${raw}"
+symbol = "󰎙 "
+style = "green"
+
+[ruby]
+format = '[$symbol$version]($style) '
+version_format = "${raw}"
+symbol = "󰴭 "
+style = "red"
+
+[elixir]
+format = '[$symbol$version]($style) '
+version_format = "${raw}"
+symbol = " "
+style = "purple"
+
+[erlang]
+format = '[$symbol$version]($style) '
+version_format = "${raw}"
+symbol = " "
+style = "red"
+
+[golang]
+format = '[$symbol$version]($style) '
+version_format = "${raw}"
+symbol = "󰟓 "
+style = "cyan"
+
+[rust]
+format = '[$symbol$version]($style) '
+version_format = "${raw}"
+symbol = "󱘗 "
+style = "red"
+
+[kubernetes]
+format = '[$symbol$context( \($namespace\))]($style)'
+style = "blue"
+disabled = false
