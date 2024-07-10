@@ -3,7 +3,7 @@ erlang = "24.3.4"
 elixir = "ref:v1.14.5"
 nodejs = "18.16.0"
 ruby = "3.2.2"
-rust = "1.71.1"
+rust = "nightly"
 
 [settings]
 always_keep_download = true
