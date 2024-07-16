@@ -7,40 +7,88 @@
 // custom settings, run the `open default settings` command
 // from the command palette or from `Zed` application menu.
 {
-  // The name of the Zed theme to use for the UI
-  "theme": "Rosé Pine Dawn",
-  // The name of a font to use for rendering text in the editor
-  "buffer_font_family": "Zed Mono",
+  // The name of a font to use for rendering text in the editor.
+  "buffer_font_family": "Zed Plex Mono",
   // The OpenType features to enable for text in the editor.
   "buffer_font_features": {
     // Disable ligatures:
     // "calt": false
   },
-  // The default font size for text in the editor
+  // The default font size for text in the editor.
   "buffer_font_size": 14,
-  // Settings related to the editor's tabs
+  // Configuration for the centered layout mode.
+  "centered_layout": {
+    "left_padding": 0,
+    "right_padding": 0
+  },
+  // Settings for inline completions.
+  "inline_completions": {
+    // A list of globs representing files that inline completions should be disabled for.
+    "disabled_globs": [".env", ".env.*"]
+  },
+  // Configuration for the editor tabs.
   "tabs": {
     "close_position": "left",
-    "git_status": true,
-    "file_icons": true
+    "git_status": true
   },
-  // Whether or not to remove any trailing whitespace from lines of a buffer
-  // before saving it.
-  "remove_trailing_whitespace_on_save": true,
-  // Whether or not to ensure there's a single newline at the end of a buffer
-  // when saving it.
-  "ensure_final_newline_on_save": true,
+  // Toolbar related settings.
+  "toolbar": {
+    "breadcrumbs": true,
+    "quick_actions": true
+  },
+  // Controls how the editor handles the autoclosed characters.
+  "always_treat_brackets_as_autoclosed": true,
+  // Configuration related to indent guides.
+  "indent_guides": {
+    "enabled": true,
+    "coloring": "indent_aware"
+  },
+  // Configuration for git-related features.
+  "git": {
+    "inline_blame": {
+      "enabled": true,
+      "delay_ms": 500
+    }
+  },
+  // Configuration for displaying extra text with hints in the editor.
+  "inlay_hints": {
+    "enabled": true
+  },
+  // Configuration related to preview tabs.
+  "preview_tabs": {
+    "enabled": true,
+    "enable_preview_from_file_finder": true,
+    "enable_preview_from_code_navigation": true
+  },
+  // The column at which to soft-wrap lines, for buffers where soft-wrap is enabled.
+  "preferred_line_length": 120,
+  // Whether or not to show render whitespace characters in the editor.
+  "show_whitespaces": "selection",
   // How to soft-wrap long lines of text
   "soft_wrap": "editor_width",
-  // How many columns a tab should occupy.
+  // Where to display vertical rulers as wrap-guides.
+  "wrap_guides": [80],
+  // The number of spaces to use for each tab character.
   "tab_size": 2,
   // Control what info is collected by Zed.
   "telemetry": {
     "diagnostics": false,
     "metrics": false
   },
-  // Different settings for specific languages.
-  "language_overrides": {
+  // Configuration for the terminal.
+  "terminal": {
+    "alternate_scroll": "on",
+    "env": {},
+    "font_family": "Iosevka Nerd Font"
+  },
+  // The name of the Zed theme to use for the UI.
+  "theme": {
+    "mode": "system",
+    "light": "Rosé Pine Dawn",
+    "dark": "Rosé Pine Moon"
+  },
+  // Configuration for specific languages.
+  "languages": {
     "Elixir": {
       "formatter": {
         "external": {
