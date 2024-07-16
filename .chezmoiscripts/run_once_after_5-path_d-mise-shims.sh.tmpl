@@ -1,0 +1,7 @@
+#!/bin/sh
+
+printf '\nAdd mise shims to global PATH config\n\n'
+
+if [ ! -f "/etc/paths.d/mise" ]; then
+  echo "$HOME/.local/share/mise/shims" | sudo tee /etc/paths.d/mise
+fi

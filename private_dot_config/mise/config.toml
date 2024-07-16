@@ -1,9 +1,9 @@
 [tools]
+elixir = "1.17.2"
 erlang = "24.3.4"
-elixir = "ref:v1.14.5"
-nodejs = "18.16.0"
+node = "18.19.0"
 ruby = "3.2.2"
-rust = "nightly"
+rust = "1.71.1"
 
 [settings]
 always_keep_download = true

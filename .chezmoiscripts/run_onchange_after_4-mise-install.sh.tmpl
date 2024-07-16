@@ -3,10 +3,10 @@
 # Ensure Homebrew env is set
 eval "$({{ template "homebrew-prefix" . }}/bin/brew shellenv)"
 
-printf '\nInstall runtimes via rtx\n\n'
+printf '\nInstall runtimes via mise\n\n'
 
-# private_dot_config/rtx/config.toml hash: {{ include "private_dot_config/rtx/config.toml" | sha256sum }}
+# private_dot_config/mise/config.toml hash: {{ include "private_dot_config/mise/config.toml" | sha256sum }}
 export KERL_BUILD_DOCS=yes
 export KERL_CONFIGURE_OPTIONS="--without-javac"
 export PATH="/opt/homebrew/opt/coreutils/libexec/gnubin:$PATH"
-rtx install
+mise install
