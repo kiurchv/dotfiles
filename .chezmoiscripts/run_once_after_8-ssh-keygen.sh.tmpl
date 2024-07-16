@@ -12,16 +12,28 @@ if [ ! -f "$PUBLIC_KEY_FILE" ]; then
   # Collect machine metadata for proper key title
   COMPUTER_NAME="$(scutil --get ComputerName)"
   SERIAL_NUMBER="$(ioreg -c IOPlatformExpertDevice -d 2 | awk -F\" '/IOPlatformSerialNumber/{print $(NF-1)}')"
-  KEY_TITLE="$COMPUTER_NAME ($SERIAL_NUMBER)"
+
+  # Check if computer name includes serial number, if not – append it
+  if [[ $COMPUTER_NAME != *"$SERIAL_NUMBER"* ]]; then
+    SERIAL_NUMBER_STRING=" ($SERIAL_NUMBER)"
+  else
+    SERIAL_NUMBER_STRING=""
+  fi
+
+  KEY_TITLE="$COMPUTER_NAME$SERIAL_NUMBER_STRING"
+
+  # Sign in to 1Password account
+  eval $(op signin)
 
   # Check for existing key pair in 1Password
-  KEY_OUTPUT="$(op item get "$KEY_TITLE" --format=json)" KEY_FOUND=$?
+  KEY_OUTPUT="$(op item get "$KEY_TITLE" --format=json)"
+  KEY_FOUND=$?
 
   if [ $KEY_FOUND -eq 0 ]; then
     echo "Found existing SSH key pair \"$KEY_TITLE\""
   else
     echo "Generating new SSH key pair \"$KEY_TITLE\""
-    KEY_OUTPUT="$(op ssh generate --title "$KEY_TITLE" --format json)"
+    KEY_OUTPUT="$(op item create --category ssh --title "$KEY_TITLE" --format json)"
   fi
 
   # Get public key contents from 1Password output
@@ -33,6 +45,7 @@ if [ ! -f "$PUBLIC_KEY_FILE" ]; then
 
   if [ $KEY_FOUND -ne 0 ]; then
     echo "Adding new SSH public key to GitHub account"
-    gh ssh-key add "$PUBLIC_KEY_FILE" --title "$KEY_TITLE"
+    gh ssh-key add "$PUBLIC_KEY_FILE" --title "$KEY_TITLE" --type authentication
+    gh ssh-key add "$PUBLIC_KEY_FILE" --title "$KEY_TITLE" --type signing
   fi
 fi

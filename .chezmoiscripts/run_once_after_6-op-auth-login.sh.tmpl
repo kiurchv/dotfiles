@@ -1,0 +1,13 @@
+#!/bin/bash
+
+# Ensure Homebrew env is set
+eval "$({{ template "homebrew-prefix" . }}/bin/brew shellenv)"
+
+printf '\nLogin to 1Password CLI\n\n'
+
+OP_SIGN_IN_ADDRESS="${OP_SIGN_IN_ADDRESS:-my.1password.com}"
+
+if [[ `op account list` = "" ]]; then
+  op account add --address $OP_SIGN_IN_ADDRESS
+  eval $(op signin)
+fi

@@ -1,0 +1,20 @@
+#!/bin/bash
+
+# Ensure Homebrew env is set
+eval "$({{ template "homebrew-prefix" . }}/bin/brew shellenv)"
+
+printf '\nLogin to GitHub CLI\n\n'
+
+REQUIRED_SCOPES='["admin:public_key", "admin:ssh_signing_key"]'
+
+# Retrieve gh auth status and token scopes
+if AUTH_STATUS_OUTPUT="$(gh auth status 2>/dev/null)"; then
+  TOKEN_SCOPES="$(echo $AUTH_STATUS_OUTPUT | grep 'Token scopes:' | sed s/.*Token\ scopes:\ // | sed s/\'//g | jq -R '. | split(", ")')"
+else
+  TOKEN_SCOPES="[]"
+fi
+
+# Authenticate gh with required scopes if needed
+if [ `jq -n "$TOKEN_SCOPES | contains($REQUIRED_SCOPES)"` != 'true' ]; then
+  gh auth login --scopes "$(echo "$REQUIRED_SCOPES" | jq 'join(" ")')" --git-protocol ssh --skip-ssh-key --web
+fi
